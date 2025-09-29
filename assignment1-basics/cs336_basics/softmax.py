@@ -8,12 +8,13 @@ def softmax(
     dim: int,
 ) -> Float[Tensor, "..."]:
     x = in_features
+
+    # shift
     x_max = torch.max(x, dim=dim, keepdim=True).values
-    x_shifted = x - x_max
+    x = x - x_max
 
-    exp_x = torch.exp(x_shifted)
-    sum_exp = torch.sum(exp_x, dim=dim, keepdim=True)
-
-    output = exp_x / sum_exp
+    # exp and normalize
+    x_exp = torch.exp(x)
+    output = x_exp / torch.sum(x_exp, dim=dim, keepdim=True)
 
     return output

@@ -26,7 +26,7 @@ def train_bpe(
     if num_merges <= 0:
         return vocab, []
 
-    with open(input_path, "r", encoding="utf-8") as f:
+    with open(input_path, encoding="utf-8") as f:
         text = f.read()
 
     if special_tokens:

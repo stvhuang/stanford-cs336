@@ -21,6 +21,7 @@ def gradient_clipping(
 
     for grad in gradients:
         total_norm_squared = total_norm_squared + torch.sum(grad**2)
+
     total_norm = torch.sqrt(total_norm_squared)
 
     clip_factor = max_l2_norm / (total_norm + epsilon)

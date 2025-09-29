@@ -50,13 +50,13 @@ class TransformerLM(nn.Module):
         self,
         input_ids: Int[Tensor, "batch_size seq_len"],
     ) -> Float[Tensor, "batch_size seq_len vocab_size"]:
-        x = self.token_embeddings(input_ids)
+        x: Float[Tensor, "batch_size seq_len d_model"] = self.token_embeddings(input_ids)
 
         for block in self.layers:
             x = block(x)
 
-        x = self.ln_final(x)
+        normed: Float[Tensor, "batch_size seq_len d_model"] = self.ln_final(x)
 
-        logits = self.lm_head(x)
+        logits: Float[Tensor, "batch_size seq_len vocab_size"] = self.lm_head(normed)
 
         return logits

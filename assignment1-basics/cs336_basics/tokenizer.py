@@ -105,5 +105,4 @@ class Tokenizer:
 
     def encode_iterable(self, text_stream: Iterable[str]) -> Iterable[int]:
         for text in text_stream:
-            for token_id in self.encode(text):
-                yield token_id
+            yield from self.encode(text)

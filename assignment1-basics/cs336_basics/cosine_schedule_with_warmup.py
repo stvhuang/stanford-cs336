@@ -14,6 +14,7 @@ def cosine_schedule_with_warmup(
     if it <= cosine_cycle_iters:
         progress = (it - warmup_iters) / (cosine_cycle_iters - warmup_iters)
         cosine_decay = 0.5 * (1.0 + math.cos(math.pi * progress))
+
         return min_learning_rate + cosine_decay * (max_learning_rate - min_learning_rate)
 
     return min_learning_rate

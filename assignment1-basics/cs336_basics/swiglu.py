@@ -1,9 +1,9 @@
-import torch
 import torch.nn as nn
 from jaxtyping import Float
 from torch import Tensor
 
-from cs336_basics.linear import Linear
+from .linear import Linear
+from .silu import silu
 
 
 class SwiGLU(nn.Module):
@@ -24,8 +24,8 @@ class SwiGLU(nn.Module):
         self,
         x: Float[Tensor, "... d_model"],
     ) -> Float[Tensor, "... d_model"]:
-        silu_out = torch.nn.functional.silu(self.w1(x))
-        gated = silu_out * self.w3(x)
-        output = self.w2(gated)
+        silu_w1x = silu(self.w1(x))
+        gated_w3x = silu_w1x * self.w3(x)
+        output = self.w2(gated_w3x)
 
         return output

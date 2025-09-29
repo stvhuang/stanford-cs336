@@ -38,16 +38,16 @@ class TransformerBlock(nn.Module):
         x: Float[Tensor, "... seq_len d_model"],
         use_causal_mask: bool = True,
     ) -> Float[Tensor, "... seq_len d_model"]:
-        normed = self.ln1(x)
-        attn_out = self.attn(normed, use_causal_mask=use_causal_mask)
+        normed1 = self.ln1(x)
+        attn_out = self.attn(normed1, use_causal_mask=use_causal_mask)
 
         if self.residual_dropout is not None:
             attn_out = self.residual_dropout(attn_out)
 
         z = x + attn_out
 
-        normed = self.ln2(z)
-        ff_out = self.ffn(normed)
+        normed2 = self.ln2(z)
+        ff_out = self.ffn(normed2)
 
         if self.residual_dropout is not None:
             ff_out = self.residual_dropout(ff_out)
