@@ -1,3 +1,7 @@
+__check my newer implementations [here](https://github.com/stvhuang/stanford-cs336-spring-2025-assignment1-basics)__
+
+---
+
 Solutions for Stanford CS336: Language Modeling from Scratch (Spring 2025)
 
 - Assignment 1 (finished): 46 passed, 2 skipped (not supported on macOS)
